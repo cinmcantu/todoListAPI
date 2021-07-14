@@ -2,13 +2,19 @@
   "name": "todo",
   "version": "1.0.0",
   "description": "Projeto To Do List",
-  "main": "index.js",
+  "main": "./src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon",
+    "start": "node"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
   }
 }

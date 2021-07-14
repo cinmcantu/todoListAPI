@@ -1,25 +1,36 @@
 const express = require('express')
+
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send(
-      '<h1>Bem vindo a To Do List</h1>'
-    )
+//Importando Controllers
+const index = require('./Controller/index-controllers')
+const tarefas = require('./Controller/tarefa-controller')
+const usuarios = require('./Controller/usuario-controller')
+
+//Importando Models
+const User = require("./Models/UserModel")
+const Task = require("./Models/TaskModel")
+
+
+// Middleware
+app.use(express.json())
+app.use(express.urlencoded({extended: true})) 
+app.use((req, res, next)=>{
+  if(req.body){
+    next()
+  }else{
+    res.send('Envie um body')
+  }
 })
 
-app.get('/usuario', (req, res) => {
-    res.send(
-        'Rota ativada com GET e recurso <strong>Usuario</strong> valores de <strong>Usuario</strong> devem ser retornados'
-    )
-})
+//Rotas
+index(app)
+tarefas(app)
+usuarios(app)
 
-app.get('/tarefa', (req, res) => {
-    res.send(
-        'Rota ativada com GET e recurso <strong>Tarefas</strong> valores de <strong>Tarefas</strong> devem ser retornados'
-    )
-})
 
+//Listen
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
