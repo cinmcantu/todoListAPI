@@ -1,11 +1,19 @@
 const Task = require("../Models/TaskModel")
-const bd = require("../infra/bd")
+const bd = require("../infra/sqlite-db")
 
 const rotaTarefa = (app) =>{
     app.get('/tarefas', (req, res) =>{
-        res.json({ 
-            "result": bd.tasks,
-            "count": bd.tasks.length
+        const tarefas = bd.all("SELECT * FROM TAREFAS", (error, rows)=>{
+            if(error){
+                res.json({ 
+                    "message": error,
+                    "error": true
+                })
+            }
+            res.json({ 
+                "result": rows,
+                "count": rows.length
+            })
         })
     })
     app.post('/tarefas', (req, res) =>{

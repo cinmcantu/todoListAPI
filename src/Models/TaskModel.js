@@ -1,13 +1,13 @@
-var idTask = 0
+const moment  = require('moment')
 
 class Task{
-    constructor(id_usuario, titulo, descricao, status, data_criacao){
-        this.id = idTask++
+    constructor(id, id_usuario, titulo, descricao, status){
+        this.id = id
         this.id_usuario = id_usuario
         this.titulo = titulo
         this.descricao = descricao
         this.status = status
-        this.data_criacao = data_criacao
+        this.data_criacao = moment(new Date.now()).format('YYY-MM-DD HH:mm:ss')
     }
 }
 

@@ -1,5 +1,5 @@
 const express = require('express')
-
+const bd = require('./infra/sqlite-db')
 const app = express()
 const port = 3000
 
@@ -11,7 +11,6 @@ const usuarios = require('./Controller/usuario-controller')
 //Importando Models
 const User = require("./Models/UserModel")
 const Task = require("./Models/TaskModel")
-
 
 // Middleware
 app.use(express.json())
@@ -28,6 +27,10 @@ app.use((req, res, next)=>{
 index(app)
 tarefas(app)
 usuarios(app)
+
+// bd.all("SELECT * FROM TAREFAS", (error, rows)=>{
+//   console.log(rows)
+// })
 
 
 //Listen
